@@ -11,6 +11,7 @@ import { useControls } from "leva";
 import * as THREE from "three";
 
 export function Avatar(props) {
+  const { animation } = props;
   const { headFollow, cursorFollow } = useControls({
     headFollow: false,
     cursorFollow: false,
@@ -18,10 +19,17 @@ export function Avatar(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF("models/me.glb");
   const { animations: typingAnimation } = useFBX("animations/Typing.fbx");
+  const { animations: standingAnimation } = useFBX("animations/Standing.fbx");
+  const { animations: fallingAnimation } = useFBX("animations/Falling.fbx");
 
   typingAnimation[0].name = "Typing";
+  standingAnimation[0].name = "Standing";
+  fallingAnimation[0].name = "Falling";
 
-  const { actions } = useAnimations(typingAnimation, group);
+  const { actions } = useAnimations(
+    [typingAnimation[0], standingAnimation[0], fallingAnimation[0]],
+    group
+  );
 
   useFrame((state) => {
     if (headFollow) {
@@ -34,8 +42,11 @@ export function Avatar(props) {
   });
 
   useEffect(() => {
-    actions["Typing"].reset().play();
-  }, []);
+    actions[animation].reset().play();
+    return () => {
+      actions[animation].reset().stop();
+    };
+  }, [animation]);
 
   return (
     <group {...props} ref={group} dispose={null}>
