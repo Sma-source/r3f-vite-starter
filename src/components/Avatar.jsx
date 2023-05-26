@@ -4,12 +4,24 @@ Command: npx gltfjsx@6.1.11 public/models/me.glb
 */
 
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { useEffect } from "react";
 
 export function Avatar(props) {
+  const group = useRef();
   const { nodes, materials } = useGLTF("models/me.glb");
+  const { animations: typingAnimation } = useFBX("animations/Typing.fbx");
+
+  typingAnimation[0].name = "Typing";
+
+  const { actions } = useAnimations(typingAnimation, group);
+
+  useEffect(() => {
+    actions["Typing"].reset().play();
+  }, []);
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} ref={group} dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         geometry={nodes.Wolf3D_Body.geometry}
