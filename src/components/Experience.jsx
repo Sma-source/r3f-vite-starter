@@ -18,6 +18,7 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
+      <ambientLight intensity={1} />
       <Office />
       {/* <Sky />
       <Environment preset="sunset" />
