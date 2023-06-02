@@ -6,18 +6,20 @@ import {
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { Avatar } from "./Avatar";
+import { Office } from "./Office";
 
 export const Experience = () => {
-  const { animation } = useControls({
-    animation: {
-      value: "Typing",
-      options: ["Typing", "Falling", "Standing"],
-    },
-  });
+  // const { animation } = useControls({
+  //   animation: {
+  //     value: "Typing",
+  //     options: ["Typing", "Falling", "Standing"],
+  //   },
+  // });
   return (
     <>
       <OrbitControls />
-      <Sky />
+      <Office />
+      {/* <Sky />
       <Environment preset="sunset" />
       <group position-y={-1}>
         <ContactShadows
@@ -40,7 +42,7 @@ export const Experience = () => {
           <planeGeometry />
           <meshStandardMaterial color="white" />
         </mesh>
-      </group>
+      </group> */}
     </>
   );
 };
