@@ -7,7 +7,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Office(props) {
-  const { nodes, materials } = useGLTF("/scene.gltf");
+  const { nodes, materials } = useGLTF("models/scene.gltf");
   return (
     <group {...props} dispose={null}>
       <group position={[-0.07, 0, -1.52]} rotation={[0, -Math.PI / 2, 0]}>
