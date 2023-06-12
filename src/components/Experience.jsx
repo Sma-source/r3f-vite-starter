@@ -17,9 +17,12 @@ export const Experience = () => {
   // });
   return (
     <>
-      <OrbitControls />
-      <ambientLight intensity={1} />
-      <Office />
+      <mesh>
+        <meshNormalMaterial />
+        <boxBufferGeometry />
+      </mesh>
+      {/* <ambientLight intensity={1} />
+      <Office /> */}
       {/* <Sky />
       <Environment preset="sunset" />
       <group position-y={-1}>
